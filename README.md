@@ -18,16 +18,16 @@ has_many: orders
 
 ## itemsテーブル
 
-|Colum               |Type        |Options                         |
+|Colum               |Type        |Options                          |
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
 | detail             | text       | null: false                    |
-| category           | integer    | null: false                    |
-| condition          | integer    | null: false                    |
-| delivery_charge    | integer    | null: false                    |
-| ships_from         | integer    | null: false                    |
-| days_to_delivery   | integer    | null: false                    |
-| item_price         | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| delivery_days_id   | integer    | null: false                    |
+| item_price_id      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ## Association
@@ -53,7 +53,7 @@ has_one: delivery_address
 |Colum               |Type     |Options      |
 | ------------------ | ------- | ----------- |
 | postal_code        | string  | null: false |
-| prefecture         | integer | null: false |
+| prefecture_id      | integer | null: false |
 | city               | string  | null: false |
 | addresses          | string  | null: false |
 | building           | string  |             |
