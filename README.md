@@ -18,7 +18,7 @@ has_many: orders
 
 ## itemsテーブル
 
-|Colum               |Type        |Options                          |
+|Colum               |Type        |Options                         |
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
 | detail             | text       | null: false                    |
@@ -27,7 +27,7 @@ has_many: orders
 | delivery_charge_id | integer    | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | delivery_days_id   | integer    | null: false                    |
-| item_price_id      | integer    | null: false                    |
+| item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ## Association
@@ -50,14 +50,15 @@ has_one: delivery_address
 
 ## delivery_addressesテーブル
 
-|Colum               |Type     |Options      |
-| ------------------ | ------- | ----------- |
-| postal_code        | string  | null: false |
-| prefecture_id      | integer | null: false |
-| city               | string  | null: false |
-| addresses          | string  | null: false |
-| building           | string  |             |
-| phone_number       | string  | null: false |
+|Colum               |Type        |Options                         |
+| ------------------ | ---------- | ------------------------------ |
+| postal_code        | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| city               | string     | null: false                    |
+| addresses          | string     | null: false                    |   
+| building           | string     |                                |
+| phone_number       | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
 
 ## Association
 belongs_to: order
