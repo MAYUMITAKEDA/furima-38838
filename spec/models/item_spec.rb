@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品' do
     context '商品出品できるとき' do
-      it 'item_name,image,detail,category_id,condition_id,delivery_charge_id,prefecture_id,delivery_day_id,item_priceの情報が存在する場合に出品できる' do
+      it '全ての情報が存在する場合に出品できる' do
         expect(@item).to be_valid
       end
     end
@@ -81,6 +81,11 @@ RSpec.describe Item, type: :model do
         @item.item_price = '５００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is invalid. Input half-width characters')
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
