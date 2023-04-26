@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OrderDeliveryAddress, type: :model do
   describe '商品購入情報の保存' do
-    before do 
+    before do
       user = FactoryBot.create(:user)
       @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id)
     end
@@ -26,12 +26,12 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'postal_codeは「3桁+ハイフン（-）+4桁」でなければ保存できない' do
         @order_delivery_address.postal_code = '1234567'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_delivery_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'postal_codeが全角の場合は保存ができない' do
         @order_delivery_address.postal_code = '１２３−４５６７'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_delivery_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'prefecture_idが空の場合は保存ができない' do
         @order_delivery_address.prefecture_id = ''
@@ -61,27 +61,27 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'phone_numberが全角数字の場合は保存ができない' do
         @order_delivery_address.phone_number = '０９０１２３４５６７８'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
       it 'phone_numberが10桁未満の場合は保存ができない' do
         @order_delivery_address.phone_number = '09012345'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is too short")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is too short')
       end
       it 'phone_numberにハイフン（-）が含まれている場合は保存ができない' do
         @order_delivery_address.phone_number = '090-1234-5678'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
       it 'Userが結びついていない場合は保存ができない' do
         @order_delivery_address.user_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("User must exist")
+        expect(@order_delivery_address.errors.full_messages).to include('User must exist')
       end
       it 'Itemが結びついていない場合は保存ができない' do
         @order_delivery_address.item_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Item must exist")
+        expect(@order_delivery_address.errors.full_messages).to include('Item must exist')
       end
       it 'tokenが空では保存ができない' do
         @order_delivery_address.token = nil
