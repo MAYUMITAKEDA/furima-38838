@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe OrderDeliveryAddress, type: :model do
   describe '商品購入情報の保存' do
     before do
+      item = FactoryBot.create(:item)
       user = FactoryBot.create(:user)
-      @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id)
+      @order_delivery_address = FactoryBot.build(:order_delivery_address, user_id: user.id, item_id: item.id)
     end
 
     context '内容に問題がないとき' do
@@ -68,6 +69,11 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include('Phone number is too short')
       end
+      it 'phone_numberが12桁以上の場合は保存ができない' do
+        @order_delivery_address.phone_number = '090123456789'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is too long')
+      end
       it 'phone_numberにハイフン（-）が含まれている場合は保存ができない' do
         @order_delivery_address.phone_number = '090-1234-5678'
         @order_delivery_address.valid?
@@ -76,12 +82,12 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'Userが結びついていない場合は保存ができない' do
         @order_delivery_address.user_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('User must exist')
+        expect(@order_delivery_address.errors.full_messages).to include("User must exist")
       end
       it 'Itemが結びついていない場合は保存ができない' do
         @order_delivery_address.item_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('Item must exist')
+        expect(@order_delivery_address.errors.full_messages).to include("Item must exist")
       end
       it 'tokenが空では保存ができない' do
         @order_delivery_address.token = nil
