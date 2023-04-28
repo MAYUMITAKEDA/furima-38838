@@ -82,12 +82,12 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it 'Userが結びついていない場合は保存ができない' do
         @order_delivery_address.user_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("User must exist")
+        expect(@order_delivery_address.errors.full_messages).to include('User must exist')
       end
       it 'Itemが結びついていない場合は保存ができない' do
         @order_delivery_address.item_id = nil
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include("Item must exist")
+        expect(@order_delivery_address.errors.full_messages).to include('Item must exist')
       end
       it 'tokenが空では保存ができない' do
         @order_delivery_address.token = nil
